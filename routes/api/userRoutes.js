@@ -4,6 +4,7 @@ const {
     getUsers, 
     getSingleUser,
     postUserLogin,
+    readToken
 } = require('../../controllers/userController');
 
 router.route('/')
@@ -11,6 +12,9 @@ router.route('/')
 
 router.route('/login')
 .post(postUserLogin)
+
+router.route('/readtoken')
+.get(readToken)
 
 router.route('/:userId')
 .get(getSingleUser);

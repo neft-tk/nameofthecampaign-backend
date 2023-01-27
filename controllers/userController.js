@@ -54,9 +54,20 @@ async function postUserLogin(req, res) {
     }
 }
 
+async function readToken(req, res) {
+    try {
+        const token = req.headers.authorization.split(' ')[1];
+        const userData = jwt.verify(token, process.env.JWT_SECRET);
+        return res.json({ user: userData })
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({ msg: 'An error occured while reading the JWT' })      
+    }
+}
 
 module.exports = {
     getUsers,
     getSingleUser,
-    postUserLogin
+    postUserLogin,
+    readToken
 };
